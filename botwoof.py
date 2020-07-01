@@ -1,9 +1,3 @@
-## To implement
-##?shake
-##?sit
-##!fetch fetches random things and brings them back
-##!subwoofer
-
 #import libraries
 import discord
 from discord.ext.commands import Bot
@@ -20,6 +14,7 @@ from typing import Union
 from os import getenv
 from dotenv import load_dotenv
 
+#load dotenv - related to bot token environment variable
 load_dotenv()
 
 #do some things for the on_typing function
@@ -32,15 +27,10 @@ DiscordChannel = Union[discord.TextChannel, discord.DMChannel, discord.GroupChan
 #bot prefix
 prefix = ";"
 
-#tile or hardwood command match
-t_or_h_matches = ["tile or hardwood", "hardwood or tile", "carpet or hardwood", "hardwood or carpet", "or hardwood", "hardwood or"]
-
-fetch_items = ["\U0001F362","\U0001F962","\U0001F361","\U0001F3CF"]
-
 #bot version
 version = ".001"
 
-#your botwoof PROD token
+#botwoof token - retreived from .env file
 TOKEN = getenv("BOT_TOKEN")
 
 #create bot object
@@ -49,8 +39,15 @@ client = Bot(command_prefix = prefix)
 #set game for bot status message
 game = discord.Game("fetch (" + prefix + ")")
 dead_game = discord.Game("dead")
-funlist = ["play GTAV","play Minecraft split-screen","go to the top of Maze Bank Tower","play Rocket League split-screen"]
 
+#tile or hardwood command match
+t_or_h_matches = ["or hardwood", "hardwood or"]
+
+#fetch items - no longer in use
+fetch_items = ["\U0001F362","\U0001F962","\U0001F361","\U0001F3CF"]
+
+#fun list for 'what should we do?' command
+funlist = ["not play GTAV","play Minecraft split-screen","go to the top of Maze Bank Tower","play Rocket League split-screen"]
 
 #define a function that is run on the on_ready event
 @client.event
@@ -138,9 +135,9 @@ async def on_message(message):
             await client.change_presence(status=discord.Status.online, activity=game)
             print("The bot is ready!")
             await message.channel.send("\U0001F436")
-##        elif prefix + "fetch" == message.content.lower():
-##            time.sleep(randint(1,20))
-##            await message.channel.send(random.choice(fetch_items) + "\U0001F436")
+        elif prefix + "fetchitem" == message.content.lower():
+            time.sleep(randint(1,20))
+            await message.channel.send("\U0001F436" + "\U0001F4A6" + random.choice(fetch_items))
         elif prefix + "fetch" in message.content.lower():
             channel = message.channel
             _, item = message.content.split(maxsplit=1)

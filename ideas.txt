@@ -1,0 +1,6 @@
+Ideas to implement
+
+shake
+sit
+fetch - fetches random things and bring them back
+subwoofer - ?
