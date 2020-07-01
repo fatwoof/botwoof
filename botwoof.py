@@ -47,7 +47,7 @@ TOKEN = getenv("BOT_TOKEN")
 client = Bot(command_prefix = prefix)
 
 #set game for bot status message
-game = discord.Game("fetch (!)")
+game = discord.Game("fetch (" + prefix + ")")
 dead_game = discord.Game("dead")
 funlist = ["play GTAV","play Minecraft split-screen","go to the top of Maze Bank Tower","play Rocket League split-screen"]
 
@@ -67,8 +67,6 @@ async def on_ready():
 
 #SIMPLE COMMANDS
 #definie a function that is run on the on_message event
-
-
 @client.event
 async def on_message(message):
     print(message.author.name+" said, '"+message.content+"'")
@@ -134,9 +132,9 @@ async def on_message(message):
             await message.channel.send("\U0001F436")
         elif prefix + "playdead" == message.content.lower():
             await client.change_presence(status=discord.Status.invisible, activity=dead_game)
-            time.sleep(1)
+            await asyncio.sleep(1)
             await message.channel.send("https://i.imgur.com/zpGmavE.png")
-            time.sleep(20)
+            await asyncio.sleep(15)
             await client.change_presence(status=discord.Status.online, activity=game)
             print("The bot is ready!")
             await message.channel.send("\U0001F436")
