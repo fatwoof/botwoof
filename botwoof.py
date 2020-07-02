@@ -41,7 +41,7 @@ bot = Bot(command_prefix=BOT_PREFIX)
 T_OR_H_MATCHES = ["or hardwood", "hardwood or"]
 
 # fetch items - no longer in use
-FETCH_ITEMS = ["\U0001F362", "\U0001F962", "\U0001F361", "\U0001F3CF"
+FETCH_ITEMS = ["\U0001F362", "\U0001F962", "\U0001F361", "\U0001F3CF"]
 
 # fun list for 'what should we do?' command
 FUNLIST = ["not play GTAV", "play Minecraft split-screen", "go to the top of Maze Bank Tower",
