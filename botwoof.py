@@ -197,7 +197,7 @@ async def whatshouldwedo_cmd(ctx):
 
 @bot.command(name='rollover')
 async def rollover(ctx):
-	await ctx.send("https://cdn.discordapp.com/attachments/714257028637392926/728091591410974780/rollover_small.gif")
+    await ctx.send("https://cdn.discordapp.com/attachments/714257028637392926/728091591410974780/rollover_small.gif")
 
 
 def run():
