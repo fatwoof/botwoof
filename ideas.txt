@@ -1,6 +1,14 @@
 Ideas to implement
 
+feed command instead of on_message method
+fetchitem command or blank fetch command
+	-bring back random emoji
+	-small chance of it being reddit gold
+	-1-180s wait
+	-50% chance of slobber with returned item
 shake
 sit
-fetch - fetches random things and bring them back
 subwoofer - ?
+make botwoof go rogue every once in a while
+	-end rogue after some time
+	-he should count down from 10 and (fake) kick you if you don't send the message

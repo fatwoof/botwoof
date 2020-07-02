@@ -37,13 +37,16 @@ DEAD_GAME = discord.Game("dead")
 # create bot object
 bot = Bot(command_prefix=BOT_PREFIX)
 
+# remove default help command
+bot.remove_command('help')
+
 # tile or hardwood command match
 T_OR_H_MATCHES = ["or hardwood", "hardwood or"]
 
 # fetch items - no longer in use
 FETCH_ITEMS = ["\U0001F362", "\U0001F962", "\U0001F361", "\U0001F3CF"]
 
-# fun list for 'what should we do?' command
+# fun list for 'whattodo' command
 FUNLIST = ["not play GTAV", "play Minecraft split-screen", "go to the top of Maze Bank Tower",
            "play Rocket League split-screen", "go outside", "go for a walk", "drink some water",
            "see what's streaming on RPAN"]
@@ -100,7 +103,27 @@ async def on_message(message):
              #         return ''.join(c for c in content if c in emoji.UNICODE_EMOJI)
         await bot.process_commands(message)
 
+@bot.command(name='help')
+async def help_cmd(ctx):
+    await ctx.send("```Hi, i'm Botwoof, Here's what I know so far:\n\
+\n\
+Helpful:\n\
+    nextround - When the next RPAN Pictionary round will be hosted\n\
+    version - My version\n\
+    libversion - The discord.py library version I use\n\
+Fun:\n\
+    greetings\n\
+    goodbye\n\
+    fetch\n\
+    bottleflip\n\
+    talk\n\
+    playdead\n\
+    rollover\n\
+    whattodo\n\
+\n\
+Feel free to message my owner, fatwoof, if i'm getting out of hand```")
 
+                   
 @bot.command(name='version')
 async def version_cmd(ctx):
     await ctx.send(f"My version is: {__version__}")
@@ -191,7 +214,7 @@ async def playdead_cmd(ctx):
     await ctx.send("\U0001F436")
 
 
-@bot.command(name='whattodo?')
+@bot.command(name='whattodo')
 async def whatshouldwedo_cmd(ctx):
     await ctx.send("You should " + random.choice(FUNLIST) + "!")
 
