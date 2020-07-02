@@ -90,7 +90,7 @@ async def on_message(message):
         # eat food command
         elif message.content.startswith("\U0001F9B4") or message.content.startswith(
         "\U0001F356") or message.content.startswith("\U0001F357") or message.content.startswith(
-             "\U0001F969") or message.content.startswith("\U0001F953"):
+        "\U0001f969")or message.content.startswith("\U0001F953"):
              await message.channel.send("\U0001F436")
              # elif prefix + "emoji" in message.content.lower():
              #     channel = message.channel
@@ -197,7 +197,7 @@ async def talk_cmd(ctx):
     await channel.send('Say "woof", I mean, say "hello"')
 
     def check(m):
-        return m.content == 'hello' and m.channel == channel
+        return m.content.lower() == 'hello' and m.channel == channel
 
     msg = await bot.wait_for('message', check=check)
     await channel.send(f'Hello {msg.author.mention}!')

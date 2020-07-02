@@ -11,4 +11,9 @@ sit
 subwoofer - ?
 make botwoof go rogue every once in a while
 	-end rogue after some time
+	-don't go rogue on serious discussions channel
 	-he should count down from 10 and (fake) kick you if you don't send the message
+
+To do
+
+fetch user avatar - multiple requests
