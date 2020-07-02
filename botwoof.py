@@ -41,11 +41,11 @@ bot = Bot(command_prefix=BOT_PREFIX)
 T_OR_H_MATCHES = ["or hardwood", "hardwood or"]
 
 # fetch items - no longer in use
-FETCH_ITEMS = ["\U0001F362", "\U0001F962", "\U0001F361", "\U0001F3CF"]
+FETCH_ITEMS = ["\U0001F362", "\U0001F962", "\U0001F361", "\U0001F3CF"
 
 # fun list for 'what should we do?' command
 FUNLIST = ["not play GTAV", "play Minecraft split-screen", "go to the top of Maze Bank Tower",
-           "play Rocket League split-screen"]
+           "play Rocket League split-screen", "go outside", "go for a walk", "drink some water", "see what's streaming on RPAN",]
 
 
 # define a function that is run on the on_ready event
@@ -190,14 +190,14 @@ async def playdead_cmd(ctx):
     await ctx.send("\U0001F436")
 
 
-@bot.command(name='what should we do?')
+@bot.command(name='whattodo?')
 async def whatshouldwedo_cmd(ctx):
     await ctx.send("You should " + random.choice(FUNLIST) + "!")
 
 
 @bot.command(name='rollover')
 async def rollover(ctx):
-    await ctx.send("https://cdn.discordapp.com/attachments/714257028637392926/728091591410974780/rollover_small.gif")
+	await ctx.send("https://cdn.discordapp.com/attachments/714257028637392926/728091591410974780/rollover_small.gif")
 
 
 def run():
