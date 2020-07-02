@@ -45,7 +45,8 @@ FETCH_ITEMS = ["\U0001F362", "\U0001F962", "\U0001F361", "\U0001F3CF"
 
 # fun list for 'what should we do?' command
 FUNLIST = ["not play GTAV", "play Minecraft split-screen", "go to the top of Maze Bank Tower",
-           "play Rocket League split-screen", "go outside", "go for a walk", "drink some water", "see what's streaming on RPAN",]
+           "play Rocket League split-screen", "go outside", "go for a walk", "drink some water",
+           "see what's streaming on RPAN"]
 
 
 # define a function that is run on the on_ready event
