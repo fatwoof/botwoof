@@ -10,7 +10,6 @@ from random import randint
 # from typing import Union
 
 import discord
-# import emoji
 from discord.ext.commands import Bot
 from dotenv import load_dotenv
 
@@ -18,12 +17,12 @@ from dotenv import load_dotenv
 # load dotenv - related to bot token environment variable (sets/imports all variables found in the .env file)
 load_dotenv()
 
-# do some things for the on_typing function
-# DiscordUser = Union[discord.User, discord.Member]
-# DiscordTextChannel = Union[discord.TextChannel, discord.DMChannel, discord.GroupChannel]
-# DiscordPrivateTextChannel = Union[discord.DMChannel, discord.GroupChannel]
-# DiscordGuildChannel = Union[discord.TextChannel, discord.VoiceChannel]
-# DiscordChannel = Union[discord.TextChannel, discord.DMChannel, discord.GroupChannel, discord.VoiceChannel]
+### do some things for the on_typing function
+##DiscordUser = Union[discord.User, discord.Member]
+##DiscordTextChannel = Union[discord.TextChannel, discord.DMChannel, discord.GroupChannel]
+##DiscordPrivateTextChannel = Union[discord.DMChannel, discord.GroupChannel]
+##DiscordGuildChannel = Union[discord.TextChannel, discord.VoiceChannel]
+##DiscordChannel = Union[discord.TextChannel, discord.DMChannel, discord.GroupChannel, discord.VoiceChannel]
 
 BOT_PREFIX = ";"
 
@@ -56,18 +55,18 @@ FUNLIST = ["not play GTAV", "play Minecraft split-screen", "go to the top of Maz
 @bot.event
 async def on_ready():
     await bot.change_presence(status=discord.Status.online, activity=GAME)
-    print("The bot is ready!")
+    print("Botwoof is off the leash!")
 
 
-# define a function that is run on the on_typing event
-# @client.event
-# async def on_typing(channel: DiscordTextChannel, user: discord.User, when: datetime.datetime):
-#     print("someone is typing")
-#     time.sleep(5)
-#     await channel.send("Hey! Hurry up and send the message already!")
+###define a function that is run on the on_typing event
+##@client.event
+##async def on_typing(channel: DiscordTextChannel, user: discord.User, when: datetime.datetime):
+##    print("someone is typing")
+##    time.sleep(5)
+##    await channel.send("Hey! Hurry up and send the message already!")
 
-##SIMPLE COMMANDS
-##definie a function that is run on the on_message event
+
+# definie a function that is run on the on_message event
 @bot.event
 async def on_message(message):
     print(message.author.name + " said, '" + message.content + "'")
@@ -86,21 +85,13 @@ async def on_message(message):
             else:
                 await channel.send('👍')
         elif any(x in message.content.lower() for x in T_OR_H_MATCHES):
-            await message.channel.send("I'm #teamhardwood, but you already know that.")
+            await message.channel.send("{0.display_name}, ".format(message.author) + "I'm #teamhardwood, but you already know that.")
         # eat food command
         elif message.content.startswith("\U0001F9B4") or message.content.startswith(
         "\U0001F356") or message.content.startswith("\U0001F357") or message.content.startswith(
         "\U0001f969")or message.content.startswith("\U0001F953"):
              await message.channel.send("\U0001F436")
-             # elif prefix + "emoji" in message.content.lower():
-             #     channel = message.channel
-             #     content = message.content
-             #     print("Test content print: " + content)
-             #     await channel.send('Hello {.author}!')
-             #     await message.channel.send(emoji.emojize('Python is :thumbs_up:'))
-             #
-             #     def extract_emojis(content):
-             #         return ''.join(c for c in content if c in emoji.UNICODE_EMOJI)
+             
         await bot.process_commands(message)
 
 @bot.command(name='help')
@@ -136,13 +127,13 @@ async def libversion_cmd(ctx):
 
 @bot.command(name='greetings')
 async def greetings_cmd(ctx):
-    await ctx.send("Greetings and Salutations! But let's stop acting like I care. "
-                   "As a matter of fact, don't message me anymore!!")
+    await ctx.send("Greetings and Salutations, " + "{0.display_name}.".format(ctx.author) + " But let's stop acting like I care. "
+                   "As a matter of fact, don't call me anymore!!")
 
 
 @bot.command(name='goodbye')
 async def goodbye_cmd(ctx):
-    await ctx.send("Goodbye friend, I think i'll stay here. Hope to see you return soon.")
+    await ctx.send("Goodbye " + "{0.display_name}. ".format(ctx.author) + "I think i'll stay here but I hope to see you return soon.")
 
 
 @bot.command(name='fetch')
@@ -150,7 +141,7 @@ async def fetch_cmd(ctx, *items: str):
     response = random.choice(FETCH_ITEMS) if not items else " ".join(items)
     await ctx.send("\U0001F436" + "\U0001F4A8")
     await asyncio.sleep(randint(1, 30))
-    await ctx.send("\U0001F436" + "\U0001F4A6" + response)
+    await ctx.send("{0.display_name}, ".format(ctx.author) + "\U0001F436" + "\U0001F4A6" + response)
 
 
 @bot.command(name='nextround', aliases=['nr'])
@@ -216,7 +207,7 @@ async def playdead_cmd(ctx):
 
 @bot.command(name='whattodo')
 async def whatshouldwedo_cmd(ctx):
-    await ctx.send("You should " + random.choice(FUNLIST) + "!")
+    await ctx.send("{0.display_name}, ".format(ctx.author) + "you should " + random.choice(FUNLIST) + "!")
 
 
 @bot.command(name='rollover')
