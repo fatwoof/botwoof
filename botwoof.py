@@ -48,7 +48,7 @@ FETCH_ITEMS = ["\U0001F362", "\U0001F962", "\U0001F361", "\U0001F3CF"]
 # fun list for 'whattodo' command
 FUNLIST = ["not play GTAV", "play Minecraft split-screen", "go to the top of Maze Bank Tower",
            "play Rocket League split-screen", "go outside", "go for a walk", "drink some water",
-           "see what's streaming on RPAN"]
+           "see what's streaming on RPAN", "take a screen break"]
 
 
 # define a function that is run on the on_ready event
@@ -96,7 +96,7 @@ async def on_message(message):
 
 @bot.command(name='help')
 async def help_cmd(ctx):
-    await ctx.send("```Hi, i'm Botwoof, Here's what I know so far:\n\
+    await ctx.send("```Hi, i'm Botwoof, Here's what I know:\n\
 \n\
 Helpful:\n\
     nextround - When the next RPAN Pictionary round will be hosted\n\
@@ -201,7 +201,6 @@ async def playdead_cmd(ctx):
     await ctx.send("https://i.imgur.com/zpGmavE.png")
     await asyncio.sleep(15)
     await bot.change_presence(status=discord.Status.online, activity=GAME)
-    print("The bot is ready!")
     await ctx.send("\U0001F436")
 
 
