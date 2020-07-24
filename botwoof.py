@@ -7,6 +7,8 @@ import random
 import time
 from os import getenv
 from random import randint
+from typing import Union
+import datetime
 # from typing import Union
 
 import discord
@@ -17,12 +19,12 @@ from dotenv import load_dotenv
 # load dotenv - related to bot token environment variable (sets/imports all variables found in the .env file)
 load_dotenv()
 
-### do some things for the on_typing function
-##DiscordUser = Union[discord.User, discord.Member]
-##DiscordTextChannel = Union[discord.TextChannel, discord.DMChannel, discord.GroupChannel]
-##DiscordPrivateTextChannel = Union[discord.DMChannel, discord.GroupChannel]
-##DiscordGuildChannel = Union[discord.TextChannel, discord.VoiceChannel]
-##DiscordChannel = Union[discord.TextChannel, discord.DMChannel, discord.GroupChannel, discord.VoiceChannel]
+# do some things for the on_typing function
+DiscordUser = Union[discord.User, discord.Member]
+DiscordTextChannel = Union[discord.TextChannel, discord.DMChannel, discord.GroupChannel]
+DiscordPrivateTextChannel = Union[discord.DMChannel, discord.GroupChannel]
+DiscordGuildChannel = Union[discord.TextChannel, discord.VoiceChannel]
+DiscordChannel = Union[discord.TextChannel, discord.DMChannel, discord.GroupChannel, discord.VoiceChannel]
 
 BOT_PREFIX = ";"
 
@@ -42,14 +44,22 @@ bot.remove_command('help')
 # tile or hardwood command match
 T_OR_H_MATCHES = ["or hardwood", "hardwood or"]
 
+# some things that are more important than hardwood
+T_OR_H_EXCLUSIONS = ["world peace", "life", "cancer cure", "curing cancer", "fatwoof", "free speech", "free democracy",
+                     "food and water", "team pink", "nuclear disarmament", "botwoof"]
+
 # fetch items - no longer in use
-FETCH_ITEMS = ["\U0001F362", "\U0001F962", "\U0001F361", "\U0001F3CF"]
+FETCHITEMS = ["\U0001F362", "\U0001F962", "\U0001F361", "\U0001F3CF"]
 
 # fun list for 'whattodo' command
 FUNLIST = ["not play GTAV", "play Minecraft split-screen", "go to the top of Maze Bank Tower",
            "play Rocket League split-screen", "go outside", "go for a walk", "drink some water",
            "see what's streaming on RPAN", "take a screen break"]
-
+# greetings list to change things up a bit
+GREETLIST = ["But let's stop acting like I care. As a matter of fact, don't call me anymore!!",
+             "I'm glad you're here.", "Is that too formal? I'm still learning the language.", "But not really...",
+             "", "I truly mean that."]
+             
 
 # define a function that is run on the on_ready event
 @bot.event
@@ -58,15 +68,24 @@ async def on_ready():
     print("Botwoof is off the leash!")
 
 
-###define a function that is run on the on_typing event
-##@client.event
+### enables bad botwoof
+##@bot.event
 ##async def on_typing(channel: DiscordTextChannel, user: discord.User, when: datetime.datetime):
 ##    print("someone is typing")
 ##    time.sleep(5)
 ##    await channel.send("Hey! Hurry up and send the message already!")
 
 
-# definie a function that is run on the on_message event
+### define a function that is run on member join
+##@bot.event
+##async def on_member_join(self, member):
+##    mention = member.mention
+##    await self.client.get_channel(channel id).sendchannel = member.server.get_channel("CHANNEL_ID")
+##    print("someone has joined")
+##    await bot.send_message("Someone has joined")
+##    await member.send('Private message')
+
+# define a function that is run on the on_message event
 @bot.event
 async def on_message(message):
     print(message.author.name + " said, '" + message.content + "'")
@@ -85,7 +104,11 @@ async def on_message(message):
             else:
                 await channel.send('👍')
         elif any(x in message.content.lower() for x in T_OR_H_MATCHES):
-            await message.channel.send("{0.display_name}, ".format(message.author) + "I'm #teamhardwood, but you already know that.")
+            if any(x in message.content.lower() for x in T_OR_H_EXCLUSIONS):
+                await message.channel.send("{0.display_name}, ".format(message.author) + "I'm usually #teamhardwood, but sometimes, " +
+                                           "one must look past hardwood and consider more imporant things in this life we live... but you already know that.")
+            else:
+                await message.channel.send("{0.display_name}, ".format(message.author) + "I'm #teamhardwood, but you already know that.")
         # eat food command
         elif message.content.startswith("\U0001F9B4") or message.content.startswith(
         "\U0001F356") or message.content.startswith("\U0001F357") or message.content.startswith(
@@ -127,8 +150,7 @@ async def libversion_cmd(ctx):
 
 @bot.command(name='greetings')
 async def greetings_cmd(ctx):
-    await ctx.send("Greetings and Salutations, " + "{0.display_name}.".format(ctx.author) + " But let's stop acting like I care. "
-                   "As a matter of fact, don't call me anymore!!")
+    await ctx.send("Greetings and Salutations, " + "{0.display_name}.".format(ctx.author) + " " + random.choice(GREETLIST))
 
 
 @bot.command(name='goodbye')
@@ -138,7 +160,7 @@ async def goodbye_cmd(ctx):
 
 @bot.command(name='fetch')
 async def fetch_cmd(ctx, *items: str):
-    response = random.choice(FETCH_ITEMS) if not items else " ".join(items)
+    response = random.choice(FETCHITEMS) if not items else " ".join(items)
     await ctx.send("\U0001F436" + "\U0001F4A8")
     await asyncio.sleep(randint(1, 30))
     await ctx.send("{0.display_name}, ".format(ctx.author) + "\U0001F436" + "\U0001F4A6" + response)

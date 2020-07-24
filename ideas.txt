@@ -17,3 +17,4 @@ make botwoof go rogue every once in a while
 To do
 
 fetch user avatar - multiple requests
+have botwoof greed new members - on_member_join is event name
